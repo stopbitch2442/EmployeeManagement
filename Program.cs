@@ -1,3 +1,5 @@
+using WindowAnalystARM;
+
 namespace EmployeeManagement
 {
     internal static class Program
