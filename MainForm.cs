@@ -19,7 +19,12 @@ namespace WindowAnalystARM
 
         private void btn_Exit_Click(object sender, EventArgs e)
         {
-            Application.Exit(); 
+            Application.Exit();
+        }
+
+        private void btn_rollUp_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

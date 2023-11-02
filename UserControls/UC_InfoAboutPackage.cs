@@ -13,18 +13,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-
-
-/* Добавить!!!
-ВНИМАНИЕ 
-ВНИМАНИЕ 
-ВНИМАНИЕ 
-ВНИМАНИЕ 
-ВНИМАНИЕ 
-SELECT p.GPName,p.Size,p.Commentary,bc.BarCode FROM Project p 
-JOIN BarCode bc ON bc.idProject=p.ID
-WHERE p.OrderNum='931686'
-*/
 namespace EmployeeManagement
 {
     public partial class UC_InfoAboutPackage : UserControl
@@ -86,7 +74,7 @@ namespace EmployeeManagement
             {
                 using (SqlConnection connection = DbContext.GetSqlConnection())
                 {
-                    string query = $@"SELECT * FROM [192.168.0.94].[datamart].[dbo].[tbPartNumber] tbPartNumber WHERE tbPartNumber.Part = '{selectedPart}';";
+                    string query = $@"SELECT OrderNum,PosInOrder,Item,PosInPart FROM [192.168.0.94].[datamart].[dbo].[tbPartNumber] tbPartNumber WHERE tbPartNumber.Part = '{selectedPart}';";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -99,8 +87,8 @@ namespace EmployeeManagement
                             string ordernum = reader["OrderNum"].ToString();
                             string posinorder = reader["PosInOrder"].ToString();
                             string item = reader["Item"].ToString();
-                            int columnIndex = 0;
-                            DGV_tbPartNumber.Rows.Add(ordernum, posinorder, item);
+                            string posinpart = reader["PosInPart"].ToString();
+                            DGV_tbPartNumber.Rows.Add(posinpart, posinorder, ordernum, item);
                         }
 
                         reader.Close();
@@ -208,19 +196,6 @@ namespace EmployeeManagement
             }
             LoadListOfPartiesForTheDay();
         }
-
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void DTP_DateEndSearchPart_ValueChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void DTP_DateStartSearchPart_ValueChanged(object sender, EventArgs e)
-        {
-        }
-
     }
 }
 
