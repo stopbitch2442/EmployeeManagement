@@ -38,21 +38,27 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DGV_PartiesForTheDay = new Guna.UI2.WinForms.Guna2DataGridView();
-            Part = new DataGridViewTextBoxColumn();
+            kommis_num = new DataGridViewTextBoxColumn();
+            Select = new DataGridViewCheckBoxColumn();
             DTP_DateStartSearchPart = new DateTimePicker();
             guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             DTP_DateEndSearchPart = new DateTimePicker();
             UC_infoPackage = new Guna.UI2.WinForms.Guna2Elipse(components);
             DGV_tbPartNumber = new Guna.UI2.WinForms.Guna2DataGridView();
-            PosInPart = new DataGridViewTextBoxColumn();
             PosInOrder = new DataGridViewTextBoxColumn();
             OrderNum = new DataGridViewTextBoxColumn();
             Item = new DataGridViewTextBoxColumn();
+            Part = new DataGridViewTextBoxColumn();
             DGV_DetailsItem = new Guna.UI2.WinForms.Guna2DataGridView();
+            btn_SearchPart = new Guna.UI2.WinForms.Guna2Button();
+            btn_showSelectPart = new Guna.UI2.WinForms.Guna2Button();
+            checkbox_selectAllParts = new Guna.UI2.WinForms.Guna2CheckBox();
             BarCode = new DataGridViewTextBoxColumn();
             Pyramida = new DataGridViewTextBoxColumn();
             TimeScan = new DataGridViewTextBoxColumn();
@@ -62,7 +68,8 @@
             IsBryansk = new DataGridViewTextBoxColumn();
             Formula = new DataGridViewTextBoxColumn();
             ItemSize = new DataGridViewTextBoxColumn();
-            btn_SearchPart = new Guna.UI2.WinForms.Guna2Button();
+            partItem = new DataGridViewTextBoxColumn();
+            orderItem = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)DGV_PartiesForTheDay).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DGV_tbPartNumber).BeginInit();
             ((System.ComponentModel.ISupportInitialize)DGV_DetailsItem).BeginInit();
@@ -86,7 +93,7 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             DGV_PartiesForTheDay.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             DGV_PartiesForTheDay.ColumnHeadersHeight = 30;
-            DGV_PartiesForTheDay.Columns.AddRange(new DataGridViewColumn[] { Part });
+            DGV_PartiesForTheDay.Columns.AddRange(new DataGridViewColumn[] { kommis_num, Select });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
@@ -96,13 +103,12 @@
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
             DGV_PartiesForTheDay.DefaultCellStyle = dataGridViewCellStyle3;
             DGV_PartiesForTheDay.GridColor = Color.FromArgb(231, 229, 255);
-            DGV_PartiesForTheDay.Location = new Point(220, 17);
+            DGV_PartiesForTheDay.Location = new Point(216, 17);
             DGV_PartiesForTheDay.Name = "DGV_PartiesForTheDay";
-            DGV_PartiesForTheDay.ReadOnly = true;
             DGV_PartiesForTheDay.RowHeadersVisible = false;
             DGV_PartiesForTheDay.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             DGV_PartiesForTheDay.RowTemplate.Height = 25;
-            DGV_PartiesForTheDay.Size = new Size(96, 898);
+            DGV_PartiesForTheDay.Size = new Size(107, 898);
             DGV_PartiesForTheDay.TabIndex = 10;
             DGV_PartiesForTheDay.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             DGV_PartiesForTheDay.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -117,7 +123,7 @@
             DGV_PartiesForTheDay.ThemeStyle.HeaderStyle.ForeColor = Color.White;
             DGV_PartiesForTheDay.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             DGV_PartiesForTheDay.ThemeStyle.HeaderStyle.Height = 30;
-            DGV_PartiesForTheDay.ThemeStyle.ReadOnly = true;
+            DGV_PartiesForTheDay.ThemeStyle.ReadOnly = false;
             DGV_PartiesForTheDay.ThemeStyle.RowsStyle.BackColor = Color.White;
             DGV_PartiesForTheDay.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             DGV_PartiesForTheDay.ThemeStyle.RowsStyle.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
@@ -127,11 +133,19 @@
             DGV_PartiesForTheDay.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             DGV_PartiesForTheDay.SelectionChanged += DGV_PartiesForTheDay_SelectionChanged;
             // 
-            // Part
+            // kommis_num
             // 
-            Part.HeaderText = "Партия";
-            Part.Name = "Part";
-            Part.ReadOnly = true;
+            kommis_num.HeaderText = "Партия";
+            kommis_num.Name = "kommis_num";
+            // 
+            // Select
+            // 
+            Select.FalseValue = "0";
+            Select.HeaderText = "X";
+            Select.Name = "Select";
+            Select.Resizable = DataGridViewTriState.True;
+            Select.SortMode = DataGridViewColumnSortMode.Automatic;
+            Select.TrueValue = "1";
             // 
             // DTP_DateStartSearchPart
             // 
@@ -192,7 +206,7 @@
             dataGridViewCellStyle8.WrapMode = DataGridViewTriState.True;
             DGV_tbPartNumber.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             DGV_tbPartNumber.ColumnHeadersHeight = 30;
-            DGV_tbPartNumber.Columns.AddRange(new DataGridViewColumn[] { PosInPart, PosInOrder, OrderNum, Item });
+            DGV_tbPartNumber.Columns.AddRange(new DataGridViewColumn[] { PosInOrder, OrderNum, Item, Part });
             dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = Color.White;
             dataGridViewCellStyle9.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
@@ -233,12 +247,6 @@
             DGV_tbPartNumber.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             DGV_tbPartNumber.SelectionChanged += DGV_tbPartNumber_SelectionChanged;
             // 
-            // PosInPart
-            // 
-            PosInPart.HeaderText = "Позиция в партии";
-            PosInPart.Name = "PosInPart";
-            PosInPart.ReadOnly = true;
-            // 
             // PosInOrder
             // 
             PosInOrder.HeaderText = "Позиция в заказе";
@@ -253,9 +261,15 @@
             // 
             // Item
             // 
-            Item.HeaderText = "Штук";
+            Item.HeaderText = "Изделий";
             Item.Name = "Item";
             Item.ReadOnly = true;
+            // 
+            // Part
+            // 
+            Part.HeaderText = "Партия";
+            Part.Name = "Part";
+            Part.ReadOnly = true;
             // 
             // DGV_DetailsItem
             // 
@@ -275,7 +289,7 @@
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
             DGV_DetailsItem.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             DGV_DetailsItem.ColumnHeadersHeight = 30;
-            DGV_DetailsItem.Columns.AddRange(new DataGridViewColumn[] { BarCode, Pyramida, TimeScan, Commentary, RescanPyramida, TimeRescan, IsBryansk, Formula, ItemSize });
+            DGV_DetailsItem.Columns.AddRange(new DataGridViewColumn[] { BarCode, Pyramida, TimeScan, Commentary, RescanPyramida, TimeRescan, IsBryansk, Formula, ItemSize, partItem, orderItem });
             dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = Color.White;
             dataGridViewCellStyle6.Font = new Font("Microsoft Sans Serif", 7.8F, FontStyle.Regular, GraphicsUnit.Point);
@@ -314,6 +328,67 @@
             DGV_DetailsItem.ThemeStyle.RowsStyle.Height = 25;
             DGV_DetailsItem.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
             DGV_DetailsItem.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            // 
+            // btn_SearchPart
+            // 
+            btn_SearchPart.BorderRadius = 23;
+            btn_SearchPart.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            btn_SearchPart.BorderThickness = 1;
+            btn_SearchPart.CustomizableEdges = customizableEdges3;
+            btn_SearchPart.DisabledState.BorderColor = Color.DarkGray;
+            btn_SearchPart.DisabledState.CustomBorderColor = Color.DarkGray;
+            btn_SearchPart.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btn_SearchPart.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btn_SearchPart.FillColor = Color.White;
+            btn_SearchPart.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_SearchPart.ForeColor = Color.Black;
+            btn_SearchPart.Location = new Point(18, 87);
+            btn_SearchPart.Name = "btn_SearchPart";
+            btn_SearchPart.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            btn_SearchPart.Size = new Size(180, 45);
+            btn_SearchPart.TabIndex = 19;
+            btn_SearchPart.Text = "Поиск";
+            btn_SearchPart.Click += btn_SearchPart_Click_1;
+            // 
+            // btn_showSelectPart
+            // 
+            btn_showSelectPart.BorderRadius = 23;
+            btn_showSelectPart.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            btn_showSelectPart.BorderThickness = 1;
+            btn_showSelectPart.CustomizableEdges = customizableEdges1;
+            btn_showSelectPart.DisabledState.BorderColor = Color.DarkGray;
+            btn_showSelectPart.DisabledState.CustomBorderColor = Color.DarkGray;
+            btn_showSelectPart.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btn_showSelectPart.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btn_showSelectPart.FillColor = Color.White;
+            btn_showSelectPart.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_showSelectPart.ForeColor = Color.Black;
+            btn_showSelectPart.Location = new Point(18, 156);
+            btn_showSelectPart.Name = "btn_showSelectPart";
+            btn_showSelectPart.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            btn_showSelectPart.Size = new Size(180, 68);
+            btn_showSelectPart.TabIndex = 20;
+            btn_showSelectPart.Text = "Отобразить выбранные партии";
+            btn_showSelectPart.Click += btn_showSelectPart_Click;
+            // 
+            // checkbox_selectAllParts
+            // 
+            checkbox_selectAllParts.AutoSize = true;
+            checkbox_selectAllParts.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            checkbox_selectAllParts.CheckedState.BorderRadius = 0;
+            checkbox_selectAllParts.CheckedState.BorderThickness = 0;
+            checkbox_selectAllParts.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            checkbox_selectAllParts.Font = new Font("Microsoft Sans Serif", 12.8F, FontStyle.Regular, GraphicsUnit.Point);
+            checkbox_selectAllParts.Location = new Point(12, 240);
+            checkbox_selectAllParts.Name = "checkbox_selectAllParts";
+            checkbox_selectAllParts.Size = new Size(198, 26);
+            checkbox_selectAllParts.TabIndex = 22;
+            checkbox_selectAllParts.Text = "Выбрать все партии";
+            checkbox_selectAllParts.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            checkbox_selectAllParts.UncheckedState.BorderRadius = 0;
+            checkbox_selectAllParts.UncheckedState.BorderThickness = 0;
+            checkbox_selectAllParts.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            checkbox_selectAllParts.CheckedChanged += checkbox_selectAllParts_CheckedChanged;
             // 
             // BarCode
             // 
@@ -369,26 +444,17 @@
             ItemSize.Name = "ItemSize";
             ItemSize.ReadOnly = true;
             // 
-            // btn_SearchPart
+            // partItem
             // 
-            btn_SearchPart.BorderRadius = 23;
-            btn_SearchPart.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            btn_SearchPart.BorderThickness = 1;
-            btn_SearchPart.CustomizableEdges = customizableEdges1;
-            btn_SearchPart.DisabledState.BorderColor = Color.DarkGray;
-            btn_SearchPart.DisabledState.CustomBorderColor = Color.DarkGray;
-            btn_SearchPart.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btn_SearchPart.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btn_SearchPart.FillColor = Color.White;
-            btn_SearchPart.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_SearchPart.ForeColor = Color.Black;
-            btn_SearchPart.Location = new Point(21, 110);
-            btn_SearchPart.Name = "btn_SearchPart";
-            btn_SearchPart.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            btn_SearchPart.Size = new Size(180, 45);
-            btn_SearchPart.TabIndex = 19;
-            btn_SearchPart.Text = "Поиск";
-            btn_SearchPart.Click += btn_SearchPart_Click_1;
+            partItem.HeaderText = "Партия";
+            partItem.Name = "partItem";
+            partItem.ReadOnly = true;
+            // 
+            // orderItem
+            // 
+            orderItem.HeaderText = "Заказ";
+            orderItem.Name = "orderItem";
+            orderItem.ReadOnly = true;
             // 
             // UC_InfoAboutPackage
             // 
@@ -396,6 +462,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             BorderStyle = BorderStyle.Fixed3D;
+            Controls.Add(checkbox_selectAllParts);
+            Controls.Add(btn_showSelectPart);
             Controls.Add(btn_SearchPart);
             Controls.Add(DGV_DetailsItem);
             Controls.Add(DGV_tbPartNumber);
@@ -425,6 +493,15 @@
         public Guna.UI2.WinForms.Guna2Elipse UC_infoPackage;
         private Guna.UI2.WinForms.Guna2DataGridView DGV_tbPartNumber;
         private Guna.UI2.WinForms.Guna2DataGridView DGV_DetailsItem;
+        private Guna.UI2.WinForms.Guna2Button btn_SearchPart;
+        private DataGridViewTextBoxColumn kommis_num;
+        private DataGridViewCheckBoxColumn Select;
+        private Guna.UI2.WinForms.Guna2Button btn_showSelectPart;
+        private Guna.UI2.WinForms.Guna2CheckBox checkbox_selectAllParts;
+        private DataGridViewTextBoxColumn PosInOrder;
+        private DataGridViewTextBoxColumn OrderNum;
+        private DataGridViewTextBoxColumn Item;
+        private DataGridViewTextBoxColumn Part;
         private DataGridViewTextBoxColumn BarCode;
         private DataGridViewTextBoxColumn Pyramida;
         private DataGridViewTextBoxColumn TimeScan;
@@ -434,11 +511,7 @@
         private DataGridViewTextBoxColumn IsBryansk;
         private DataGridViewTextBoxColumn Formula;
         private DataGridViewTextBoxColumn ItemSize;
-        private Guna.UI2.WinForms.Guna2Button btn_SearchPart;
-        private DataGridViewTextBoxColumn Part;
-        private DataGridViewTextBoxColumn PosInPart;
-        private DataGridViewTextBoxColumn PosInOrder;
-        private DataGridViewTextBoxColumn OrderNum;
-        private DataGridViewTextBoxColumn Item;
+        private DataGridViewTextBoxColumn partItem;
+        private DataGridViewTextBoxColumn orderItem;
     }
 }
